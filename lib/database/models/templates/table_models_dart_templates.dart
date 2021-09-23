@@ -1,5 +1,5 @@
 import 'package:dart_style/dart_style.dart';
-import 'package:snippet_generator/utils/extensions.dart';
+import 'package:query_builder/src/extensions.dart';
 
 import '../parsers/data_type_model.dart';
 import '../parsers/table_models.dart';
@@ -18,7 +18,7 @@ class SqlTableDartTemplate {
     String sourceCode = """
 import 'dart:convert';
 
-import 'package:snippet_generator/database/models/sql_values.dart';
+import 'package:query_builder/database/models/sql_values.dart';
 
 ${allTables.map((e) => e.templates.singleClass(mapAllTables)).join('\n\n')}
 

@@ -1,8 +1,7 @@
 // ignore_for_file: constant_identifier_names
 import 'dart:math';
 
-import 'package:snippet_generator/globals/option.dart';
-import 'package:snippet_generator/utils/extensions.dart';
+import 'package:query_builder/src/extensions.dart';
 
 abstract class SqlType {
   const SqlType._();
@@ -91,7 +90,7 @@ abstract class SqlType {
   };
 
   String toSql() {
-    return this.map(
+    return map(
       date: (date) {
         return '${date.type.toEnumString()}${date.fractionalSeconds == null ? "" : "(${date.fractionalSeconds})"}';
       },
@@ -410,12 +409,12 @@ class SqlTypeDate extends SqlType {
 
   SqlTypeDate copyWith({
     SqlDateVariant? type,
-    Option<int>? fractionalSeconds,
+    Ref<int?>? fractionalSeconds,
   }) {
     return SqlTypeDate(
       type: type ?? this.type,
       fractionalSeconds: fractionalSeconds != null
-          ? fractionalSeconds.valueOrNull
+          ? fractionalSeconds.inner
           : this.fractionalSeconds,
     );
   }
@@ -461,14 +460,14 @@ class SqlTypeString extends SqlType {
     bool? variableSize,
     bool? binary,
     int? size,
-    Option<String>? characterSet,
+    Ref<String?>? characterSet,
   }) {
     return SqlTypeString(
       variableSize: variableSize ?? this.variableSize,
       binary: binary ?? this.binary,
       size: size ?? this.size,
       characterSet:
-          characterSet != null ? characterSet.valueOrNull : this.characterSet,
+          characterSet != null ? characterSet.inner : this.characterSet,
     );
   }
 }
@@ -509,13 +508,13 @@ class SqlTypeEnumeration extends SqlType {
   SqlTypeEnumeration copyWith({
     List<String>? variants,
     bool? allowMultipleValues,
-    Option<String>? characterSet,
+    Ref<String?>? characterSet,
   }) {
     return SqlTypeEnumeration(
       variants: variants ?? this.variants,
       allowMultipleValues: allowMultipleValues ?? this.allowMultipleValues,
       characterSet:
-          characterSet != null ? characterSet.valueOrNull : this.characterSet,
+          characterSet != null ? characterSet.inner : this.characterSet,
     );
   }
 }

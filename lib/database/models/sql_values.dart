@@ -1,13 +1,13 @@
-import 'package:snippet_generator/database/models/bool_query_models.dart';
-import 'package:snippet_generator/database/models/collect_query_models.dart';
-import 'package:snippet_generator/database/models/comp_query_models.dart';
-import 'package:snippet_generator/database/models/connection_models.dart';
+import 'package:query_builder/database/models/bool_query_models.dart';
+import 'package:query_builder/database/models/collect_query_models.dart';
+import 'package:query_builder/database/models/comp_query_models.dart';
+import 'package:query_builder/database/models/connection_models.dart';
 
-export 'package:snippet_generator/database/models/bool_query_models.dart';
-export 'package:snippet_generator/database/models/collect_query_models.dart';
-export 'package:snippet_generator/database/models/comp_query_models.dart';
-export 'package:snippet_generator/database/models/connection_models.dart';
-export 'package:snippet_generator/database/models/order_query_models.dart';
+export 'package:query_builder/database/models/bool_query_models.dart';
+export 'package:query_builder/database/models/collect_query_models.dart';
+export 'package:query_builder/database/models/comp_query_models.dart';
+export 'package:query_builder/database/models/connection_models.dart';
+export 'package:query_builder/database/models/order_query_models.dart';
 
 class SqlContext {
   final SqlDatabase database;
@@ -79,6 +79,9 @@ abstract class SqlValue<T extends SqlValue<T>> implements SqlGenerator {
   SqlBoolValue isNotNull() => SqlNullComp(this, negated: true);
   SqlBoolValue isNull() => SqlNullComp(this, negated: false);
   SqlValue<T> ifNull(SqlValue<T> value) => SqlCoalesceValue([this, value]);
+}
+abstract class SqlValueAny extends SqlValue<SqlValueAny> {
+
 }
 
 class SqlRawValue<T extends SqlValue<T>> extends SqlValue<T> {

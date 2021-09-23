@@ -1,5 +1,5 @@
 import 'package:petitparser/petitparser.dart';
-import 'package:snippet_generator/utils/extensions.dart';
+import 'package:query_builder/src/extensions.dart';
 
 import 'data_type_model.dart';
 import 'data_type_parser.dart';

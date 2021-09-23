@@ -1,7 +1,7 @@
 // ignore_for_file: constant_identifier_names
+// import 'package:oxidized/oxidized.dart';
 import 'package:petitparser/petitparser.dart';
-import 'package:snippet_generator/globals/option.dart';
-import 'package:snippet_generator/utils/extensions.dart';
+import 'package:query_builder/src/extensions.dart';
 
 import '../templates/table_models_dart_templates.dart';
 import '../templates/table_models_sql_templates.dart';
@@ -88,7 +88,7 @@ class SqlTable {
     List<SqlTableKey>? tableKeys,
     List<SqlForeignKey>? foreignKeys,
     List<Token<String>>? errors,
-    Option<Token>? token,
+    Ref<Token?>? token,
   }) {
     return SqlTable(
       name: name ?? this.name,
@@ -96,7 +96,7 @@ class SqlTable {
       tableKeys: tableKeys ?? this.tableKeys,
       foreignKeys: foreignKeys ?? this.foreignKeys,
       errors: errors ?? this.errors,
-      token: token != null ? token.valueOrNull : this.token,
+      token: token != null ? token.inner : this.token,
     );
   }
 }
@@ -180,24 +180,23 @@ class SqlTableKey {
   }
 
   SqlTableKey copyWith({
-    Option<String>? constraintName,
-    Option<String>? indexName,
+    Ref<String?>? constraintName,
+    Ref<String?>? indexName,
     SqlIndexType? indexType,
     bool? unique,
     bool? primary,
     List<SqlKeyItem>? columns,
-    Option<Token>? token,
+    Ref<Token?>? token,
   }) {
     return SqlTableKey(
-      constraintName: constraintName != null
-          ? constraintName.valueOrNull
-          : this.constraintName,
-      indexName: indexName != null ? indexName.valueOrNull : this.indexName,
+      constraintName:
+          constraintName != null ? constraintName.inner : this.constraintName,
+      indexName: indexName != null ? indexName.inner : this.indexName,
       indexType: indexType ?? this.indexType,
       unique: unique ?? this._unique,
       primary: primary ?? this.primary,
       columns: columns ?? this.columns,
-      token: token != null ? token.valueOrNull : this.token,
+      token: token != null ? token.inner : this.token,
     );
   }
 }
@@ -250,16 +249,15 @@ class SqlForeignKey {
   }
 
   SqlForeignKey copyWith({
-    Option<String>? constraintName,
-    Option<String>? indexName,
+    Ref<String?>? constraintName,
+    Ref<String?>? indexName,
     List<String>? ownColumns,
     SqlReference? reference,
   }) {
     return SqlForeignKey(
-      constraintName: constraintName != null
-          ? constraintName.valueOrNull
-          : this.constraintName,
-      indexName: indexName != null ? indexName.valueOrNull : this.indexName,
+      constraintName:
+          constraintName != null ? constraintName.inner : this.constraintName,
+      indexName: indexName != null ? indexName.inner : this.indexName,
       ownColumns: ownColumns ?? this.ownColumns,
       reference: reference ?? this.reference,
     );
@@ -274,20 +272,14 @@ class Tuple3<F, S, L> {
   const Tuple3(this.first, this.second, this.last);
 
   Tuple3<F, S, L> copyWith({
-    Option<F>? first,
-    Option<S>? second,
-    Option<L>? last,
+    Ref<F>? first,
+    Ref<S>? second,
+    Ref<L>? last,
   }) {
     return Tuple3<F, S, L>(
-      null is F
-          ? (first != null ? first.valueOrNull as F : this.first)
-          : (first?.valueOrNull ?? this.first),
-      null is S
-          ? (second != null ? second.valueOrNull as S : this.second)
-          : (second?.valueOrNull ?? this.second),
-      null is L
-          ? (last != null ? last.valueOrNull as L : this.last)
-          : (last?.valueOrNull ?? this.last),
+      first != null ? first.inner : this.first,
+      second != null ? second.inner : this.second,
+      last != null ? last.inner : this.last,
     );
   }
 }
@@ -462,14 +454,14 @@ class SqlColumn {
     bool? autoIncrement,
     bool? unique,
     bool? primary,
-    Option<String>? defaultValue,
+    Ref<String?>? defaultValue,
     bool? nullable,
-    Option<String>? collation,
+    Ref<String?>? collation,
     bool? visible,
-    Option<String>? generatedValue,
+    Ref<String?>? generatedValue,
     bool? virtual,
     bool? alwaysGenerated,
-    Option<SqlColumnTokens>? tokens,
+    Ref<SqlColumnTokens?>? tokens,
   }) {
     return SqlColumn(
       name: name ?? this.name,
@@ -478,16 +470,15 @@ class SqlColumn {
       unique: unique ?? this.unique,
       primary: primary ?? this.primary,
       defaultValue:
-          defaultValue != null ? defaultValue.valueOrNull : this.defaultValue,
+          defaultValue != null ? defaultValue.inner : this.defaultValue,
       nullable: nullable ?? this.nullable,
-      collation: collation != null ? collation.valueOrNull : this.collation,
+      collation: collation != null ? collation.inner : this.collation,
       visible: visible ?? this.visible,
-      generatedValue: generatedValue != null
-          ? generatedValue.valueOrNull
-          : this.generatedValue,
+      generatedValue:
+          generatedValue != null ? generatedValue.inner : this.generatedValue,
       virtual: virtual ?? this.virtual,
       alwaysGenerated: alwaysGenerated ?? this.alwaysGenerated,
-      tokens: tokens != null ? tokens.valueOrNull : this.tokens,
+      tokens: tokens != null ? tokens.inner : this.tokens,
     );
   }
 }

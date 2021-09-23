@@ -1,4 +1,4 @@
-import 'package:snippet_generator/database/models/sql_values.dart';
+import 'package:query_builder/database/models/sql_values.dart';
 
 abstract class SqlBoolValue extends SqlValue<SqlBoolValue> {
   const SqlBoolValue();

@@ -1,8 +1,8 @@
 import 'dart:math';
 
 import 'package:petitparser/petitparser.dart';
-import 'package:snippet_generator/parsers/parsers.dart';
-import 'package:snippet_generator/utils/extensions.dart';
+import 'package:query_builder/src/parsers.dart';
+import 'package:query_builder/src/extensions.dart';
 
 import 'create_table_parser.dart';
 import 'data_type_model.dart';

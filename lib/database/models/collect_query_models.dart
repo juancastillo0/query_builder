@@ -1,4 +1,4 @@
-import 'package:snippet_generator/database/models/sql_values.dart';
+import 'package:query_builder/database/models/sql_values.dart';
 
 class SqlAggCompValue<T extends SqlValue<T>> extends SqlValue<T> {
   final List<SqlValue<T>> values;
