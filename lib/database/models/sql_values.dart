@@ -46,6 +46,8 @@ abstract class SqlValue<T extends SqlValue<T>> implements SqlGenerator {
       {required bool nullWithAnyNull}) = SqlAggCompValue.least;
   const factory SqlValue.nullValue() = SqlNullValue;
 
+  static const null_ = SqlNullValue<SqlValueAny>();
+
   static SqlDateValue dateTime(DateTime value) => SqlDateValue.dateTime(value);
   static SqlDateValue date(DateTime value) => SqlDateValue.date(value);
   static SqlDateValue time(DateTime value) => SqlDateValue.time(value);
@@ -80,9 +82,8 @@ abstract class SqlValue<T extends SqlValue<T>> implements SqlGenerator {
   SqlBoolValue isNull() => SqlNullComp(this, negated: false);
   SqlValue<T> ifNull(SqlValue<T> value) => SqlCoalesceValue([this, value]);
 }
-abstract class SqlValueAny extends SqlValue<SqlValueAny> {
 
-}
+abstract class SqlValueAny extends SqlValue<SqlValueAny> {}
 
 class SqlRawValue<T extends SqlValue<T>> extends SqlValue<T> {
   final String raw;
