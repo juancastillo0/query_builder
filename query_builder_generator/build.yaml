@@ -1,0 +1,35 @@
+targets:
+  $default:
+    builders:
+      query_builder_generator|validators_lib_gen:
+        enabled: true
+
+builders:
+  # tables:
+  #   target: ":query_builder_generator"
+  #   import: "package:query_builder_generator/query_builder_generator.dart"
+  #   builder_factories: ["tablesGenerator"]
+  #   build_extensions: {".dart": [".tables.g.part"]}
+  #   auto_apply: dependents
+  #   build_to: cache
+  #   applies_builders: ["source_gen|combining_builder"]
+  # validator_gen:
+  #   target: ":valida_generator"
+  #   import: "package:valida_generator/valida_generator.dart"
+  #   builder_factories: ["validatorGen"]
+  #   build_extensions: {".dart": [".validator_gen.g.part"]}
+  #   auto_apply: dependents
+  #   build_to: cache
+  #   applies_builders: ["source_gen|combining_builder"]
+
+  validators_lib_gen:
+    # library URI containing the builder - maps to `lib/member_count_library_generator.dart`
+    import: "package:query_builder_generator/query_builder_generator.dart"
+    # Name of the function in the above library to call.
+    builder_factories: ["tablesGenerator"]
+    # The mapping from the source extension to the generated file extension
+    build_extensions: { ".sql": [".sql.dart"] }
+    # Will automatically run on any package that depends on it
+    auto_apply: dependents
+    # Generate the output directly into the package, not to a hidden cache dir
+    build_to: source
