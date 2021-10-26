@@ -94,6 +94,10 @@ abstract class SqlQueryResult implements Iterable<SqlRow> {
 abstract class SqlRow implements Map<String, dynamic> {
   Object? columnAt(int index);
   List<Object?>? get columnsValues;
+
+  /// Returns a two-level map that on the first level contains the resolved
+  /// table name, and on the second level the column name (or its alias).
+  Map<String?, Map<String, dynamic>> toTableColumnMap();
 }
 
 /// Thrown by sqlite methods.
@@ -178,6 +182,11 @@ class TransactionCtxValue extends TransactionCtx with TableConnectionMixin {
     this.connection, {
     required Never Function() rollback,
   }) : _rollback = rollback;
+
+  @override
+  Future<T> transaction<T>(Future<T> Function(TransactionCtx) transactionFn) {
+    return transactionFn(this);
+  }
 
   @override
   Never rollback() => _rollback();
