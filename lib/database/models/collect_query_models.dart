@@ -58,7 +58,7 @@ class SqlAggCompValue<T extends SqlValue<T>> extends SqlValue<T> {
 
       return _d.toSql(ctx);
     } else {
-      throw FallThroughError();
+      throw Exception('FallThroughError');
     }
   }
 }
